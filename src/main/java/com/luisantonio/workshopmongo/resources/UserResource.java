@@ -57,5 +57,14 @@ public class UserResource {
         return ResponseEntity.noContent().build();
     }
 
+    @RequestMapping(value="/{id}", method = RequestMethod.PUT) //Poderia ter usado o @PutMapping
+    public ResponseEntity<Void> update(@RequestBody UserDTO objDTO, @PathVariable  String id){
+        User obj = service.fromDTO(objDTO);
+        obj.setId(id);
+        obj = service.update(obj);
+        //resposta vazia porem nessa resposta vamos colocar um  cabeçalho  com a url do novo recurso criado (BOA PRATICA)
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

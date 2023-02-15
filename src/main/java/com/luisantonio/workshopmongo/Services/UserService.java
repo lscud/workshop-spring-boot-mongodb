@@ -39,6 +39,19 @@ public class UserService {
         repo.deleteById(id);
     }
 
+    public User update(User obj) {
+        User newObj = findById(obj.getId());
+        updateData(newObj, obj);
+        return repo.save(newObj);
+    }
+
+    private void updateData(User newObj, User obj) {
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
+
+    }
+
+
     //metodo fromDTO irá pegar um DTO e instanciar um user. Caminho inverso que fizemos na classe DTO.  Vai ser criada
     //aqui pois para a instanciar um user eu posso querer acessar o banco de dados e quem ja tem a dependencia para o banco de dados é o
     //UserService (private UserRepository repo;);
