@@ -5,6 +5,7 @@ import com.luisantonio.workshopmongo.domain.User;
 import com.luisantonio.workshopmongo.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,5 +35,11 @@ public class UserResource {
         //collect((Collectors.toList()) é para converter novamente o streaming para lista
         List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect((Collectors.toList()));
         return ResponseEntity.ok().body(listDto); //.ok é um metodo que vai instanciar o responserentity ja com a resposta http respondendo que ocorreu com sucesso
+    }
+
+    @RequestMapping(value="/{id}", method = RequestMethod.GET) //Poderia ter usado o @GetMapping
+    public ResponseEntity<UserDTO> findById(@PathVariable  String id){
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(new UserDTO(obj));
     }
 }
