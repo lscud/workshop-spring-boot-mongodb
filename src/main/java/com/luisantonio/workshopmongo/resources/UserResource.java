@@ -50,4 +50,12 @@ public class UserResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri(); //irá pegar o endereço do novo objeto que eu inseri
         return ResponseEntity.created(uri).build(); //irá me retornar uma resposta vazia com codigo 201 e com o cabeçalho contendo a localização do novo recurso criado
     }
+
+    @RequestMapping(value="/{id}", method = RequestMethod.DELETE) //Poderia ter usado o @DeleteMapping
+    public ResponseEntity<Void> delete(@PathVariable  String id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

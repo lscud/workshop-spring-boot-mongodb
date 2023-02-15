@@ -34,6 +34,11 @@ public class UserService {
 
     }
 
+    public void delete(String id){
+        findById(id);
+        repo.deleteById(id);
+    }
+
     //metodo fromDTO irá pegar um DTO e instanciar um user. Caminho inverso que fizemos na classe DTO.  Vai ser criada
     //aqui pois para a instanciar um user eu posso querer acessar o banco de dados e quem ja tem a dependencia para o banco de dados é o
     //UserService (private UserRepository repo;);
