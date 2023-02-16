@@ -5,6 +5,7 @@ import com.luisantonio.workshopmongo.Services.UserService;
 import com.luisantonio.workshopmongo.domain.Post;
 import com.luisantonio.workshopmongo.domain.User;
 import com.luisantonio.workshopmongo.dto.UserDTO;
+import com.luisantonio.workshopmongo.resources.util.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,4 +32,12 @@ public class PostResource {
         Post obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
+
+    @RequestMapping(value="/titlesearch", method = RequestMethod.GET) //Poderia ter usado o @GetMapping
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text){
+        text = URL.decodeParam(text);
+        List<Post> list = service.findByTitle(text);
+        return ResponseEntity.ok().body(list);
+    }
+
 }
