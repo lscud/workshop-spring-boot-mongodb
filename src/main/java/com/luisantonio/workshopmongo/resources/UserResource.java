@@ -1,6 +1,7 @@
 package com.luisantonio.workshopmongo.resources;
 
 import com.luisantonio.workshopmongo.Services.UserService;
+import com.luisantonio.workshopmongo.domain.Post;
 import com.luisantonio.workshopmongo.domain.User;
 import com.luisantonio.workshopmongo.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +67,10 @@ public class UserResource {
         return ResponseEntity.noContent().build();
     }
 
+    @RequestMapping(value="/{id}/posts", method = RequestMethod.GET) //Poderia ter usado o @GetMapping
+    public ResponseEntity<List<Post>> findPosts(@PathVariable  String id){
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+    }
 
 }

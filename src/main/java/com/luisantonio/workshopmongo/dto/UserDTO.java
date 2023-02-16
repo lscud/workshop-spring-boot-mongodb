@@ -4,6 +4,7 @@ import com.luisantonio.workshopmongo.domain.User;
 
 import java.io.Serializable;
 
+//neste caso o userDTO terá os mesmos atributos do user porém é um exmeplo para ilustrar a implementação mas a verdade é que enste caso realmente nao rpecisaria do userDTO
 public class UserDTO implements Serializable {
 
     private String id;
